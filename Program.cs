@@ -111,7 +111,7 @@ namespace PRTG_Redis_Sensor
                         {
                             Channel = "Keys",
                             Unit = PRTGUnit.Count,
-                            Value = server.DatabaseSize.ToString()
+                            Value = server.DatabaseSize(0).ToString()
                         }
                     }
                 }
