@@ -105,6 +105,14 @@ namespace PRTG_Redis_Sensor
                             Unit = PRTGUnit.Count,
                             Value = replicationInfo.SingleOrDefault(i => i.Key.Equals("connected_slaves")).Value
                         }
+                    },
+                    {
+                        new PRTGResult()
+                        {
+                            Channel = "Keys",
+                            Unit = PRTGUnit.Count,
+                            Value = server.DatabaseSize.ToString()
+                        }
                     }
                 }
             };
