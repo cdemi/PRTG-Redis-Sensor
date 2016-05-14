@@ -98,6 +98,7 @@ namespace PRTG_Redis_Sensor
                         {
                             channel = "Is Master",
                             unit = PRTGUnit.Count,
+                            ShowChart = 0,
                             value = replicationInfo.SingleOrDefault(i => i.Key.Equals("role")).Value.Equals("master", StringComparison.InvariantCultureIgnoreCase)?"1":"0"
                         }
                     },

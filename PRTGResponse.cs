@@ -61,6 +61,7 @@ namespace PRTG_Redis_Sensor
         public string channel { get; set; }
         public string value { get; set; }
         public PRTGUnit unit { get; set; }
+        public int? ShowChart { get; set; }
         public int? Float { get; set; }
     }
 }
