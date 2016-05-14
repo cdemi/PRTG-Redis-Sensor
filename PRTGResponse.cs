@@ -53,18 +53,14 @@ namespace PRTG_Redis_Sensor
     }
     public class PRTGResponse
     {
-        public List<PRTGResult> Result { get; set; }
+        public List<PRTGResult> result { get; set; }
     }
 
     public class PRTGResult
     {
-
-        public string Channel { get; set; }
-        public string Value { get; set; }
-        public PRTGUnit Unit { get; set; }
-        public PRTGSize? SpeedSize { get; set; }
-        public PRTGSize? VolumeSize { get; set; }
-        public PRTGTime? SpeedTime { get; set; }
-        public int? Float;
+        public string channel { get; set; }
+        public string value { get; set; }
+        public PRTGUnit unit { get; set; }
+        public int? Float { get; set; }
     }
 }

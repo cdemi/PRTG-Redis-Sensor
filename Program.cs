@@ -21,101 +21,105 @@ namespace PRTG_Redis_Sensor
             var statsInfo = info.SingleOrDefault(i => i.Key.Equals("Stats", StringComparison.InvariantCultureIgnoreCase));
             var replicationInfo = info.SingleOrDefault(i => i.Key.Equals("Replication", StringComparison.InvariantCultureIgnoreCase));
 
-            var response = new PRTGResponse()
-            {
-                Result = new System.Collections.Generic.List<PRTGResult>
+            var response =
+                new
+                {
+                    prtg = new PRTGResponse()
+                    {
+                        result = new System.Collections.Generic.List<PRTGResult>
                 {
                     {
                         new PRTGResult()
                         {
-                            Channel = "Uptime",
-                            Unit = PRTGUnit.TimeSeconds,
-                            Value = serverInfo.SingleOrDefault(i => i.Key.Equals("uptime_in_seconds")).Value
+                            channel = "Uptime",
+                            unit = PRTGUnit.TimeSeconds,
+                            value = serverInfo.SingleOrDefault(i => i.Key.Equals("uptime_in_seconds")).Value
                         }
                     },
                     {
                         new PRTGResult()
                         {
-                            Channel = "Connected Clients",
-                            Unit = PRTGUnit.Count,
-                            Value = clientsInfo.SingleOrDefault(i => i.Key.Equals("connected_clients")).Value
+                            channel = "Connected Clients",
+                            unit = PRTGUnit.Count,
+                            value = clientsInfo.SingleOrDefault(i => i.Key.Equals("connected_clients")).Value
                         }
                     },
                     {
                         new PRTGResult()
                         {
-                            Channel = "Blocked Clients",
-                            Unit = PRTGUnit.Count,
-                            Value = clientsInfo.SingleOrDefault(i => i.Key.Equals("blocked_clients")).Value
+                            channel = "Blocked Clients",
+                            unit = PRTGUnit.Count,
+                            value = clientsInfo.SingleOrDefault(i => i.Key.Equals("blocked_clients")).Value
                         }
                     },
                     {
                         new PRTGResult()
                         {
-                            Channel = "Used Memory",
-                            Unit = PRTGUnit.BytesMemory,
-                            Value = memoryInfo.SingleOrDefault(i => i.Key.Equals("used_memory")).Value
+                            channel = "Used Memory",
+                            unit = PRTGUnit.BytesMemory,
+                            value = memoryInfo.SingleOrDefault(i => i.Key.Equals("used_memory")).Value
                         }
                     },
                     {
                         new PRTGResult()
                         {
-                            Channel = "Memory Fragmentation Ratio",
-                            Unit = PRTGUnit.Custom,
+                            channel = "Memory Fragmentation Ratio",
+                            unit = PRTGUnit.Custom,
                             Float = 1,
-                            Value = memoryInfo.SingleOrDefault(i => i.Key.Equals("mem_fragmentation_ratio")).Value
+                            value = memoryInfo.SingleOrDefault(i => i.Key.Equals("mem_fragmentation_ratio")).Value
                         }
                     },
                     {
                         new PRTGResult()
                         {
-                            Channel = "Total Connections Received",
-                            Unit = PRTGUnit.Count,
-                            Value = statsInfo.SingleOrDefault(i => i.Key.Equals("total_connections_received")).Value
+                            channel = "Total Connections Received",
+                            unit = PRTGUnit.Count,
+                            value = statsInfo.SingleOrDefault(i => i.Key.Equals("total_connections_received")).Value
                         }
                     },
                     {
                         new PRTGResult()
                         {
-                            Channel = "Total Commands Processed",
-                            Unit = PRTGUnit.Count,
-                            Value = statsInfo.SingleOrDefault(i => i.Key.Equals("total_commands_processed")).Value
+                            channel = "Total Commands Processed",
+                            unit = PRTGUnit.Count,
+                            value = statsInfo.SingleOrDefault(i => i.Key.Equals("total_commands_processed")).Value
                         }
                     },
                     {
                         new PRTGResult()
                         {
-                            Channel = "Instantaneous Operations per Second",
-                            Unit = PRTGUnit.Count,
-                            Value = statsInfo.SingleOrDefault(i => i.Key.Equals("instantaneous_ops_per_sec")).Value
+                            channel = "Instantaneous Operations per Second",
+                            unit = PRTGUnit.Count,
+                            value = statsInfo.SingleOrDefault(i => i.Key.Equals("instantaneous_ops_per_sec")).Value
                         }
                     },
                     {
                         new PRTGResult()
                         {
-                            Channel = "Replication Role",
-                            Unit = PRTGUnit.Custom,
-                            Value = replicationInfo.SingleOrDefault(i => i.Key.Equals("role")).Value
+                            channel = "Is Master",
+                            unit = PRTGUnit.Count,
+                            value = replicationInfo.SingleOrDefault(i => i.Key.Equals("role")).Value.Equals("master", StringComparison.InvariantCultureIgnoreCase)?"1":"0"
                         }
                     },
                     {
                         new PRTGResult()
                         {
-                            Channel = "Connected Slaves",
-                            Unit = PRTGUnit.Count,
-                            Value = replicationInfo.SingleOrDefault(i => i.Key.Equals("connected_slaves")).Value
+                            channel = "Connected Slaves",
+                            unit = PRTGUnit.Count,
+                            value = replicationInfo.SingleOrDefault(i => i.Key.Equals("connected_slaves")).Value
                         }
                     },
                     {
                         new PRTGResult()
                         {
-                            Channel = "Keys",
-                            Unit = PRTGUnit.Count,
-                            Value = server.DatabaseSize(0).ToString()
+                            channel = "Keys",
+                            unit = PRTGUnit.Count,
+                            value = server.DatabaseSize(0).ToString()
                         }
                     }
                 }
-            };
+                    }
+                };
 
             Console.WriteLine(JsonConvert.SerializeObject(response, Formatting.Indented, new JsonSerializerSettings
             {
