@@ -10,8 +10,10 @@ namespace PRTG_Redis_Sensor
         static void Main(string[] args)
         {
             var serverHostAndPort = args[0];
+            var connectionConfig = $"{serverHostAndPort},AllowAdmin=True";
+            connectionConfig += GetPasswordFromArgs(args);
 
-            var redis = ConnectionMultiplexer.Connect($"{serverHostAndPort},AllowAdmin=True");
+            var redis = ConnectionMultiplexer.Connect(connectionConfig);
             var server = redis.GetServer(serverHostAndPort);
 
             var info = server.Info();
@@ -126,6 +128,23 @@ namespace PRTG_Redis_Sensor
             {
                 NullValueHandling = NullValueHandling.Ignore
             }));
+        }
+
+        /// <summary>
+        /// Gets the Redis login password if it is present in the 
+        /// second program argument.
+        /// </summary>
+        /// <param name="args">Array of program arguments</param>
+        /// <returns>The formatted password string</returns>
+        private static string GetPasswordFromArgs(string[] args)
+        {
+            if (args.Length > 1)
+            {
+                var redisPassword = args[1];
+                return $",Password={redisPassword}";
+            }
+
+            return string.Empty;
         }
     }
 }
