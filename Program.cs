@@ -20,6 +20,7 @@ namespace PRTG_Redis_Sensor
             var serverInfo = info.SingleOrDefault(i => i.Key.Equals("Server", StringComparison.InvariantCultureIgnoreCase));
             var clientsInfo = info.SingleOrDefault(i => i.Key.Equals("Clients", StringComparison.InvariantCultureIgnoreCase));
             var memoryInfo = info.SingleOrDefault(i => i.Key.Equals("Memory", StringComparison.InvariantCultureIgnoreCase));
+            var persistenceInfo = info.SingleOrDefault(i => i.Key.Equals("Persistence", StringComparison.InvariantCultureIgnoreCase));
             var statsInfo = info.SingleOrDefault(i => i.Key.Equals("Stats", StringComparison.InvariantCultureIgnoreCase));
             var replicationInfo = info.SingleOrDefault(i => i.Key.Equals("Replication", StringComparison.InvariantCultureIgnoreCase));
 
@@ -65,10 +66,69 @@ namespace PRTG_Redis_Sensor
                     {
                         new PRTGResult()
                         {
+                            channel = "Used Memory RSS",
+                            unit = PRTGUnit.BytesMemory,
+                            value = memoryInfo.SingleOrDefault(i => i.Key.Equals("used_memory_rss")).Value
+                        }
+                    },
+                    {
+                        new PRTGResult()
+                        {
+                            channel = "Used Memory Peak",
+                            unit = PRTGUnit.BytesMemory,
+                            value = memoryInfo.SingleOrDefault(i => i.Key.Equals("used_memory_peak")).Value
+                        }
+                    },
+                    {
+                        new PRTGResult()
+                        {
                             channel = "Memory Fragmentation Ratio",
                             unit = PRTGUnit.Custom,
                             Float = 1,
                             value = memoryInfo.SingleOrDefault(i => i.Key.Equals("mem_fragmentation_ratio")).Value
+                        }
+                    },
+                    {
+                        new PRTGResult()
+                        {
+                            channel = "RDB Last Background Save Status",
+                            unit = PRTGUnit.Count,
+                            ShowChart = 0,
+                            value = persistenceInfo.SingleOrDefault(i => i.Key.Equals("rdb_last_bgsave_status")).Value == "ok" ? "1" : "0"
+                        }
+                    },
+                    {
+                        new PRTGResult()
+                        {
+                            channel = "RDB Last Background Save Time in Seconds",
+                            unit = PRTGUnit.TimeSeconds,
+                            value = persistenceInfo.SingleOrDefault(i => i.Key.Equals("rdb_last_bgsave_time_sec")).Value
+                        }
+                    },
+                    {
+                        new PRTGResult()
+                        {
+                            channel = "AOF Last Rewrite Time in Seconds",
+                            unit = PRTGUnit.TimeSeconds,
+                            value = persistenceInfo.SingleOrDefault(i => i.Key.Equals("aof_last_rewrite_time_sec")).Value
+                        }
+                    },
+                    {
+                        new PRTGResult()
+                        {
+                            channel = "AOF Last Background Rewrite Status",
+                            unit = PRTGUnit.Count,
+                            ShowChart = 0,
+                            value = persistenceInfo.SingleOrDefault(i => i.Key.Equals("aof_last_bgrewrite_status")).Value == "ok" ? "1" : "0"
+                        }
+                    },
+                    {
+                        new PRTGResult()
+                        {
+                            channel = "AOF Last Write Status",
+                            unit = PRTGUnit.Count,
+                            ShowChart = 0,
+                            value = persistenceInfo.SingleOrDefault(i => i.Key.Equals("aof_last_write_status")).Value == "ok" ? "1" : "0"
                         }
                     },
                     {
@@ -101,7 +161,7 @@ namespace PRTG_Redis_Sensor
                             channel = "Is Master",
                             unit = PRTGUnit.Count,
                             ShowChart = 0,
-                            value = replicationInfo.SingleOrDefault(i => i.Key.Equals("role")).Value.Equals("master", StringComparison.InvariantCultureIgnoreCase)?"1":"0"
+                            value = replicationInfo.SingleOrDefault(i => i.Key.Equals("role")).Value.Equals("master", StringComparison.InvariantCultureIgnoreCase) ? "1" : "0"
                         }
                     },
                     {
