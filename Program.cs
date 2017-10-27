@@ -23,6 +23,7 @@ namespace PRTG_Redis_Sensor
             var persistenceInfo = info.SingleOrDefault(i => i.Key.Equals("Persistence", StringComparison.InvariantCultureIgnoreCase));
             var statsInfo = info.SingleOrDefault(i => i.Key.Equals("Stats", StringComparison.InvariantCultureIgnoreCase));
             var replicationInfo = info.SingleOrDefault(i => i.Key.Equals("Replication", StringComparison.InvariantCultureIgnoreCase));
+            var keyspaceInfo = info.SingleOrDefault(i => i.Key.Equals("Keyspace", StringComparison.InvariantCultureIgnoreCase));
 
             var response =
                 new
@@ -177,7 +178,15 @@ namespace PRTG_Redis_Sensor
                         {
                             channel = "Keys",
                             unit = PRTGUnit.Count,
-                            value = server.DatabaseSize(0).ToString()
+                            value = keyspaceInfo.SingleOrDefault(i => i.Key.Equals("db0")).Value.Split(',').Select(x => x.Split('=')).ToDictionary(x => x[0], x => x[1])["keys"]
+                        }
+                    },
+                    {
+                        new PRTGResult()
+                        {
+                            channel = "Keys Expires",
+                            unit = PRTGUnit.Count,
+                            value = keyspaceInfo.SingleOrDefault(i => i.Key.Equals("db0")).Value.Split(',').Select(x => x.Split('=')).ToDictionary(x => x[0], x => x[1])["expires"]
                         }
                     }
                 }
