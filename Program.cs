@@ -2,6 +2,7 @@
 using System.Linq;
 using System;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace PRTG_Redis_Sensor
 {
@@ -178,7 +179,7 @@ namespace PRTG_Redis_Sensor
                         {
                             channel = "Keys",
                             unit = PRTGUnit.Count,
-                            value = keyspaceInfo.SingleOrDefault(i => i.Key.Equals("db0")).Value.Split(',').Select(x => x.Split('=')).ToDictionary(x => x[0], x => x[1])["keys"]
+                            value = SafeGetInt32(() => keyspaceInfo != null ? keyspaceInfo.SingleOrDefault(i => i.Key.Equals("db0")).Value.Split(',').Select(x => x.Split('=')).ToDictionary(x => x[0], x => x[1])["keys"] : "0")
                         }
                     },
                     {
@@ -186,7 +187,7 @@ namespace PRTG_Redis_Sensor
                         {
                             channel = "Keys Expires",
                             unit = PRTGUnit.Count,
-                            value = keyspaceInfo.SingleOrDefault(i => i.Key.Equals("db0")).Value.Split(',').Select(x => x.Split('=')).ToDictionary(x => x[0], x => x[1])["expires"]
+                            value = SafeGetInt32(() => keyspaceInfo != null ? keyspaceInfo.SingleOrDefault(i => i.Key.Equals("db0")).Value.Split(',').Select(x => x.Split('=')).ToDictionary(x => x[0], x => x[1])["expires"] : "0")
                         }
                     }
                 }
@@ -214,6 +215,19 @@ namespace PRTG_Redis_Sensor
             }
 
             return string.Empty;
+        }
+
+        private static string SafeGetInt32(Func<string> func)
+        {
+            try
+            {
+                return func();
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.ToString());
+                return "0";
+            }
         }
     }
 }
