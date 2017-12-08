@@ -20,4 +20,8 @@ A Redis Sensor for PRTG. Read more at: https://blog.cdemi.io/monitoring-redis-in
 ## Sensor parameters samples
 
 - `myredis.domain.local:6379`
-- `myredis.domain.local:6379 somepassword`
+- `myredis.domain.local:6379 db0`
+- `myredis.domain.local:6379 db1`
+- `myredis.domain.local:6379 db0 somepassword`
+- `myredis.domain.local:6379 db2 somepassword`
+

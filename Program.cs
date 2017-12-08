@@ -13,6 +13,7 @@ namespace PRTG_Redis_Sensor
             var serverHostAndPort = args[0];
             var connectionConfig = $"{serverHostAndPort},AllowAdmin=True";
             connectionConfig += GetPasswordFromArgs(args);
+            var databaseId = GetDatabaseIdFromArgs(args);
 
             var redis = ConnectionMultiplexer.Connect(connectionConfig);
             var server = redis.GetServer(serverHostAndPort);
@@ -179,7 +180,7 @@ namespace PRTG_Redis_Sensor
                         {
                             channel = "Keys",
                             unit = PRTGUnit.Count,
-                            value = SafeGetInt32(() => keyspaceInfo != null ? keyspaceInfo.SingleOrDefault(i => i.Key.Equals("db0")).Value.Split(',').Select(x => x.Split('=')).ToDictionary(x => x[0], x => x[1])["keys"] : "0")
+                            value = SafeGetInt32(() => keyspaceInfo != null ? keyspaceInfo.SingleOrDefault(i => i.Key.Equals(databaseId)).Value.Split(',').Select(x => x.Split('=')).ToDictionary(x => x[0], x => x[1])["keys"] : "0")
                         }
                     },
                     {
@@ -187,7 +188,7 @@ namespace PRTG_Redis_Sensor
                         {
                             channel = "Keys Expires",
                             unit = PRTGUnit.Count,
-                            value = SafeGetInt32(() => keyspaceInfo != null ? keyspaceInfo.SingleOrDefault(i => i.Key.Equals("db0")).Value.Split(',').Select(x => x.Split('=')).ToDictionary(x => x[0], x => x[1])["expires"] : "0")
+                            value = SafeGetInt32(() => keyspaceInfo != null ? keyspaceInfo.SingleOrDefault(i => i.Key.Equals(databaseId)).Value.Split(',').Select(x => x.Split('=')).ToDictionary(x => x[0], x => x[1])["expires"] : "0")
                         }
                     }
                 }
@@ -208,9 +209,9 @@ namespace PRTG_Redis_Sensor
         /// <returns>The formatted password string</returns>
         private static string GetPasswordFromArgs(string[] args)
         {
-            if (args.Length > 1)
+            if (args.Length > 2)
             {
-                var redisPassword = args[1];
+                var redisPassword = args[2];
                 return $",Password={redisPassword}";
             }
 
@@ -229,5 +230,22 @@ namespace PRTG_Redis_Sensor
                 return "0";
             }
         }
-    }
+
+        /// <summary>
+        /// Gets the redis database id from given arguments
+        /// </summary>
+        /// <param name="args">The arguments</param>
+        /// <returns>returns given databaseid. default: db0</returns>
+        private static string GetDatabaseIdFromArgs(string[] args)
+        {
+          var databaseId = "db0";
+
+          if (args.Length > 1)
+          {
+            databaseId = args[1];
+          }
+
+          return databaseId;
+        }
+  }
 }
