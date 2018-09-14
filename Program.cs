@@ -32,165 +32,181 @@ namespace PRTG_Redis_Sensor
                     prtg = new PRTGResponse()
                     {
                         result = new System.Collections.Generic.List<PRTGResult>
-                {
-                    {
-                        new PRTGResult()
                         {
-                            channel = "Uptime",
-                            unit = PRTGUnit.TimeSeconds,
-                            value = serverInfo.SingleOrDefault(i => i.Key.Equals("uptime_in_seconds")).Value
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Uptime",
+                                    unit = PRTGUnit.TimeSeconds,
+                                    value = serverInfo.SingleOrDefault(i => i.Key.Equals("uptime_in_seconds")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Connected Clients",
+                                    unit = PRTGUnit.Count,
+                                    value = clientsInfo.SingleOrDefault(i => i.Key.Equals("connected_clients")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Blocked Clients",
+                                    unit = PRTGUnit.Count,
+                                    value = clientsInfo.SingleOrDefault(i => i.Key.Equals("blocked_clients")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Used Memory",
+                                    unit = PRTGUnit.BytesMemory,
+                                    value = memoryInfo.SingleOrDefault(i => i.Key.Equals("used_memory")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Used Memory RSS",
+                                    unit = PRTGUnit.BytesMemory,
+                                    value = memoryInfo.SingleOrDefault(i => i.Key.Equals("used_memory_rss")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Used Memory Peak",
+                                    unit = PRTGUnit.BytesMemory,
+                                    value = memoryInfo.SingleOrDefault(i => i.Key.Equals("used_memory_peak")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Memory Fragmentation Ratio",
+                                    unit = PRTGUnit.Custom,
+                                    Float = 1,
+                                    value = memoryInfo.SingleOrDefault(i => i.Key.Equals("mem_fragmentation_ratio")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "RDB Last Background Save Status",
+                                    unit = PRTGUnit.Count,
+                                    ShowChart = 0,
+                                    value = persistenceInfo.SingleOrDefault(i => i.Key.Equals("rdb_last_bgsave_status")).Value == "ok" ? "1" : "0"
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "RDB Last Background Save Time in Seconds",
+                                    unit = PRTGUnit.TimeSeconds,
+                                    value = persistenceInfo.SingleOrDefault(i => i.Key.Equals("rdb_last_bgsave_time_sec")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "AOF Last Rewrite Time in Seconds",
+                                    unit = PRTGUnit.TimeSeconds,
+                                    value = persistenceInfo.SingleOrDefault(i => i.Key.Equals("aof_last_rewrite_time_sec")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "AOF Last Background Rewrite Status",
+                                    unit = PRTGUnit.Count,
+                                    ShowChart = 0,
+                                    value = persistenceInfo.SingleOrDefault(i => i.Key.Equals("aof_last_bgrewrite_status")).Value == "ok" ? "1" : "0"
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "AOF Last Write Status",
+                                    unit = PRTGUnit.Count,
+                                    ShowChart = 0,
+                                    value = persistenceInfo.SingleOrDefault(i => i.Key.Equals("aof_last_write_status")).Value == "ok" ? "1" : "0"
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Total Connections Received",
+                                    unit = PRTGUnit.Count,
+                                    value = statsInfo.SingleOrDefault(i => i.Key.Equals("total_connections_received")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Total Commands Processed",
+                                    unit = PRTGUnit.Count,
+                                    value = statsInfo.SingleOrDefault(i => i.Key.Equals("total_commands_processed")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Instantaneous Operations per Second",
+                                    unit = PRTGUnit.Count,
+                                    value = statsInfo.SingleOrDefault(i => i.Key.Equals("instantaneous_ops_per_sec")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Is Master",
+                                    unit = PRTGUnit.Count,
+                                    ShowChart = 0,
+                                    value = replicationInfo.SingleOrDefault(i => i.Key.Equals("role")).Value.Equals("master", StringComparison.InvariantCultureIgnoreCase) ? "1" : "0"
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Connected Slaves",
+                                    unit = PRTGUnit.Count,
+                                    value = replicationInfo.SingleOrDefault(i => i.Key.Equals("connected_slaves")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Keys",
+                                    unit = PRTGUnit.Count,
+                                    value = SafeGetInt32(() => keyspaceInfo != null ? keyspaceInfo.SingleOrDefault(i => i.Key.Equals("db0")).Value.Split(',').Select(x => x.Split('=')).ToDictionary(x => x[0], x => x[1])["keys"] : "0")
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Keys Expires",
+                                    unit = PRTGUnit.Count,
+                                    value = SafeGetInt32(() => keyspaceInfo != null ? keyspaceInfo.SingleOrDefault(i => i.Key.Equals("db0")).Value.Split(',').Select(x => x.Split('=')).ToDictionary(x => x[0], x => x[1])["expires"] : "0")
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "keyspace_hits",
+                                    unit = PRTGUnit.Count,
+                                    value = statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_hits")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "keyspace_misses",
+                                    unit = PRTGUnit.Count,
+                                    value = statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_misses")).Value
+                                }
+                            }
                         }
-                    },
-                    {
-                        new PRTGResult()
-                        {
-                            channel = "Connected Clients",
-                            unit = PRTGUnit.Count,
-                            value = clientsInfo.SingleOrDefault(i => i.Key.Equals("connected_clients")).Value
-                        }
-                    },
-                    {
-                        new PRTGResult()
-                        {
-                            channel = "Blocked Clients",
-                            unit = PRTGUnit.Count,
-                            value = clientsInfo.SingleOrDefault(i => i.Key.Equals("blocked_clients")).Value
-                        }
-                    },
-                    {
-                        new PRTGResult()
-                        {
-                            channel = "Used Memory",
-                            unit = PRTGUnit.BytesMemory,
-                            value = memoryInfo.SingleOrDefault(i => i.Key.Equals("used_memory")).Value
-                        }
-                    },
-                    {
-                        new PRTGResult()
-                        {
-                            channel = "Used Memory RSS",
-                            unit = PRTGUnit.BytesMemory,
-                            value = memoryInfo.SingleOrDefault(i => i.Key.Equals("used_memory_rss")).Value
-                        }
-                    },
-                    {
-                        new PRTGResult()
-                        {
-                            channel = "Used Memory Peak",
-                            unit = PRTGUnit.BytesMemory,
-                            value = memoryInfo.SingleOrDefault(i => i.Key.Equals("used_memory_peak")).Value
-                        }
-                    },
-                    {
-                        new PRTGResult()
-                        {
-                            channel = "Memory Fragmentation Ratio",
-                            unit = PRTGUnit.Custom,
-                            Float = 1,
-                            value = memoryInfo.SingleOrDefault(i => i.Key.Equals("mem_fragmentation_ratio")).Value
-                        }
-                    },
-                    {
-                        new PRTGResult()
-                        {
-                            channel = "RDB Last Background Save Status",
-                            unit = PRTGUnit.Count,
-                            ShowChart = 0,
-                            value = persistenceInfo.SingleOrDefault(i => i.Key.Equals("rdb_last_bgsave_status")).Value == "ok" ? "1" : "0"
-                        }
-                    },
-                    {
-                        new PRTGResult()
-                        {
-                            channel = "RDB Last Background Save Time in Seconds",
-                            unit = PRTGUnit.TimeSeconds,
-                            value = persistenceInfo.SingleOrDefault(i => i.Key.Equals("rdb_last_bgsave_time_sec")).Value
-                        }
-                    },
-                    {
-                        new PRTGResult()
-                        {
-                            channel = "AOF Last Rewrite Time in Seconds",
-                            unit = PRTGUnit.TimeSeconds,
-                            value = persistenceInfo.SingleOrDefault(i => i.Key.Equals("aof_last_rewrite_time_sec")).Value
-                        }
-                    },
-                    {
-                        new PRTGResult()
-                        {
-                            channel = "AOF Last Background Rewrite Status",
-                            unit = PRTGUnit.Count,
-                            ShowChart = 0,
-                            value = persistenceInfo.SingleOrDefault(i => i.Key.Equals("aof_last_bgrewrite_status")).Value == "ok" ? "1" : "0"
-                        }
-                    },
-                    {
-                        new PRTGResult()
-                        {
-                            channel = "AOF Last Write Status",
-                            unit = PRTGUnit.Count,
-                            ShowChart = 0,
-                            value = persistenceInfo.SingleOrDefault(i => i.Key.Equals("aof_last_write_status")).Value == "ok" ? "1" : "0"
-                        }
-                    },
-                    {
-                        new PRTGResult()
-                        {
-                            channel = "Total Connections Received",
-                            unit = PRTGUnit.Count,
-                            value = statsInfo.SingleOrDefault(i => i.Key.Equals("total_connections_received")).Value
-                        }
-                    },
-                    {
-                        new PRTGResult()
-                        {
-                            channel = "Total Commands Processed",
-                            unit = PRTGUnit.Count,
-                            value = statsInfo.SingleOrDefault(i => i.Key.Equals("total_commands_processed")).Value
-                        }
-                    },
-                    {
-                        new PRTGResult()
-                        {
-                            channel = "Instantaneous Operations per Second",
-                            unit = PRTGUnit.Count,
-                            value = statsInfo.SingleOrDefault(i => i.Key.Equals("instantaneous_ops_per_sec")).Value
-                        }
-                    },
-                    {
-                        new PRTGResult()
-                        {
-                            channel = "Is Master",
-                            unit = PRTGUnit.Count,
-                            ShowChart = 0,
-                            value = replicationInfo.SingleOrDefault(i => i.Key.Equals("role")).Value.Equals("master", StringComparison.InvariantCultureIgnoreCase) ? "1" : "0"
-                        }
-                    },
-                    {
-                        new PRTGResult()
-                        {
-                            channel = "Connected Slaves",
-                            unit = PRTGUnit.Count,
-                            value = replicationInfo.SingleOrDefault(i => i.Key.Equals("connected_slaves")).Value
-                        }
-                    },
-                    {
-                        new PRTGResult()
-                        {
-                            channel = "Keys",
-                            unit = PRTGUnit.Count,
-                            value = SafeGetInt32(() => keyspaceInfo != null ? keyspaceInfo.SingleOrDefault(i => i.Key.Equals("db0")).Value.Split(',').Select(x => x.Split('=')).ToDictionary(x => x[0], x => x[1])["keys"] : "0")
-                        }
-                    },
-                    {
-                        new PRTGResult()
-                        {
-                            channel = "Keys Expires",
-                            unit = PRTGUnit.Count,
-                            value = SafeGetInt32(() => keyspaceInfo != null ? keyspaceInfo.SingleOrDefault(i => i.Key.Equals("db0")).Value.Split(',').Select(x => x.Split('=')).ToDictionary(x => x[0], x => x[1])["expires"] : "0")
-                        }
-                    }
-                }
                     }
                 };
 
