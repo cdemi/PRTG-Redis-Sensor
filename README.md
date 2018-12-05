@@ -7,6 +7,8 @@ A Redis Sensor for PRTG. Read more at: https://blog.cdemi.io/monitoring-redis-in
 * Redis Server
 
 # Usage
+## Download or Compile
+You can download the latest `PRTG-Redis-Sensor-Windows.zip` from [GitHub Releases](https://github.com/cdemi/PRTG-Redis-Sensor/releases), or you can download the source-code and compile it yourself
 
 ## Run the executable
 `"PRTG Redis Sensor.exe" <ServerAndPort> <Password?>`
