@@ -1,30 +1,32 @@
-﻿using StackExchange.Redis;
-using System.Linq;
+﻿using Newtonsoft.Json;
+using StackExchange.Redis;
 using System;
-using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Linq;
 
 namespace PRTG_Redis_Sensor
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            var serverHostAndPort = args[0];
-            var connectionConfig = $"{serverHostAndPort},AllowAdmin=True";
+            string serverHostAndPort = args[0];
+            string connectionConfig = $"{serverHostAndPort},AllowAdmin=True";
             connectionConfig += GetPasswordFromArgs(args);
 
-            var redis = ConnectionMultiplexer.Connect(connectionConfig);
-            var server = redis.GetServer(serverHostAndPort);
+            ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(connectionConfig);
+            IServer server = redis.GetServer(serverHostAndPort);
 
-            var info = server.Info();
-            var serverInfo = info.SingleOrDefault(i => i.Key.Equals("Server", StringComparison.InvariantCultureIgnoreCase));
-            var clientsInfo = info.SingleOrDefault(i => i.Key.Equals("Clients", StringComparison.InvariantCultureIgnoreCase));
-            var memoryInfo = info.SingleOrDefault(i => i.Key.Equals("Memory", StringComparison.InvariantCultureIgnoreCase));
-            var persistenceInfo = info.SingleOrDefault(i => i.Key.Equals("Persistence", StringComparison.InvariantCultureIgnoreCase));
-            var statsInfo = info.SingleOrDefault(i => i.Key.Equals("Stats", StringComparison.InvariantCultureIgnoreCase));
-            var replicationInfo = info.SingleOrDefault(i => i.Key.Equals("Replication", StringComparison.InvariantCultureIgnoreCase));
-            var keyspaceInfo = info.SingleOrDefault(i => i.Key.Equals("Keyspace", StringComparison.InvariantCultureIgnoreCase));
+            IGrouping<string, System.Collections.Generic.KeyValuePair<string, string>>[] info = server.Info();
+            IGrouping<string, System.Collections.Generic.KeyValuePair<string, string>> serverInfo = info.SingleOrDefault(i => i.Key.Equals("Server", StringComparison.InvariantCultureIgnoreCase));
+            IGrouping<string, System.Collections.Generic.KeyValuePair<string, string>> clientsInfo = info.SingleOrDefault(i => i.Key.Equals("Clients", StringComparison.InvariantCultureIgnoreCase));
+            IGrouping<string, System.Collections.Generic.KeyValuePair<string, string>> memoryInfo = info.SingleOrDefault(i => i.Key.Equals("Memory", StringComparison.InvariantCultureIgnoreCase));
+            IGrouping<string, System.Collections.Generic.KeyValuePair<string, string>> persistenceInfo = info.SingleOrDefault(i => i.Key.Equals("Persistence", StringComparison.InvariantCultureIgnoreCase));
+            IGrouping<string, System.Collections.Generic.KeyValuePair<string, string>> statsInfo = info.SingleOrDefault(i => i.Key.Equals("Stats", StringComparison.InvariantCultureIgnoreCase));
+            IGrouping<string, System.Collections.Generic.KeyValuePair<string, string>> replicationInfo = info.SingleOrDefault(i => i.Key.Equals("Replication", StringComparison.InvariantCultureIgnoreCase));
+            IGrouping<string, System.Collections.Generic.KeyValuePair<string, string>> keyspaceInfo = info.SingleOrDefault(i => i.Key.Equals("Keyspace", StringComparison.InvariantCultureIgnoreCase));
+            IGrouping<string, System.Collections.Generic.KeyValuePair<string, string>> cpuInfo = info.SingleOrDefault(i => i.Key.Equals("CPU", StringComparison.InvariantCultureIgnoreCase));
+            IGrouping<string, System.Collections.Generic.KeyValuePair<string, string>> clusterInfo = info.SingleOrDefault(i => i.Key.Equals("Cluster", StringComparison.InvariantCultureIgnoreCase));
 
             var response =
                 new
@@ -205,6 +207,42 @@ namespace PRTG_Redis_Sensor
                                     unit = PRTGUnit.Count,
                                     value = statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_misses")).Value
                                 }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Used CPU Sys",
+                                    unit = PRTGUnit.Custom,
+                                    Float=1,
+                                    value = cpuInfo.SingleOrDefault(i => i.Key.Equals("used_cpu_sys")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Used CPU User",
+                                    unit = PRTGUnit.Custom,
+                                    Float=1,
+                                    value = cpuInfo.SingleOrDefault(i => i.Key.Equals("used_cpu_user")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Used CPU Sys Children",
+                                    unit = PRTGUnit.Custom,
+                                    Float=1,
+                                    value = cpuInfo.SingleOrDefault(i => i.Key.Equals("used_cpu_sys_children")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Used CPU User Children",
+                                    unit = PRTGUnit.Custom,
+                                    Float=1,
+                                    value = cpuInfo.SingleOrDefault(i => i.Key.Equals("used_cpu_user_children")).Value
+                                }
                             }
                         }
                     }
@@ -226,7 +264,7 @@ namespace PRTG_Redis_Sensor
         {
             if (args.Length > 1)
             {
-                var redisPassword = args[1];
+                string redisPassword = args[1];
                 return $",Password={redisPassword}";
             }
 
