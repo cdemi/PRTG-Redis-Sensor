@@ -243,6 +243,15 @@ namespace PRTG_Redis_Sensor
                                     Float=1,
                                     value = cpuInfo.SingleOrDefault(i => i.Key.Equals("used_cpu_user_children")).Value
                                 }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Cluster Enabled",
+                                    unit = PRTGUnit.Count,
+                                    ShowChart = 0,
+                                    value = clusterInfo.SingleOrDefault(i => i.Key.Equals("cluster_enabled")).Value
+                                }
                             }
                         }
                     }
