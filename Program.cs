@@ -162,6 +162,46 @@ namespace PRTG_Redis_Sensor
                             {
                                 new PRTGResult()
                                 {
+                                    channel = "Total Net Input Bytes",
+                                    unit = PRTGUnit.BytesBandwidth,
+                                    value = statsInfo.SingleOrDefault(i => i.Key.Equals("total_net_input_bytes")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Total Net Output Bytes",
+                                    unit = PRTGUnit.BytesBandwidth,
+                                    value = statsInfo.SingleOrDefault(i => i.Key.Equals("total_net_output_bytes")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Rejected Connections",
+                                    unit = PRTGUnit.Count,
+                                    value = statsInfo.SingleOrDefault(i => i.Key.Equals("rejected_connections")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Pubsub Channels",
+                                    unit = PRTGUnit.Count,
+                                    value = statsInfo.SingleOrDefault(i => i.Key.Equals("pubsub_channels")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Pubsib Patterns",
+                                    unit = PRTGUnit.Count,
+                                    value = statsInfo.SingleOrDefault(i => i.Key.Equals("pubsub_patterns")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
                                     channel = "Is Master",
                                     unit = PRTGUnit.Count,
                                     ShowChart = 0,
