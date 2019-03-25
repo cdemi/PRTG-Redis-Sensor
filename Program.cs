@@ -171,6 +171,40 @@ namespace PRTG_Redis_Sensor
                             {
                                 new PRTGResult()
                                 {
+                                    channel = "Is Replication Backlog Active",
+                                    unit = PRTGUnit.Count,
+                                    ShowChart = 0,
+                                    value = replicationInfo.SingleOrDefault(i => i.Key.Equals("repl_backlog_active")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Replication Backlog Size",
+                                    unit = PRTGUnit.BytesMemory,
+                                    value = replicationInfo.SingleOrDefault(i => i.Key.Equals("repl_backlog_size")).Value
+                                }
+                            }
+                            ,
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Replication Backlog First Size Byte Offset",
+                                    unit = PRTGUnit.BytesMemory,
+                                    value = replicationInfo.SingleOrDefault(i => i.Key.Equals("repl_backlog_first_byte_offset")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
+                                    channel = "Replication Backlog Histlen",
+                                    unit = PRTGUnit.BytesMemory,
+                                    value = replicationInfo.SingleOrDefault(i => i.Key.Equals("repl_backlog_histlen")).Value
+                                }
+                            },
+                            {
+                                new PRTGResult()
+                                {
                                     channel = "Connected Slaves",
                                     unit = PRTGUnit.Count,
                                     value = replicationInfo.SingleOrDefault(i => i.Key.Equals("connected_slaves")).Value
