@@ -10,14 +10,23 @@ namespace PRTG_Redis_Sensor
     {
         private static void Main(string[] args)
         {
-            string serverHostAndPort = args[0];
-            string connectionConfig = $"{serverHostAndPort},AllowAdmin=True";
-            connectionConfig += GetPasswordFromArgs(args);
+            ConfigurationOptions configurationOptions = new ConfigurationOptions() {
+                EndPoints =
+                {
+                    { args[0] }
+                },
+                AllowAdmin = true
+            };
 
-            ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(connectionConfig);
-            IServer server = redis.GetServer(serverHostAndPort);
+            if (args.Length > 1)
+            {
+                configurationOptions.Password = args[1];
+            }
 
-            IGrouping<string, System.Collections.Generic.KeyValuePair<string, string>>[] info = server.Info();
+            ConnectionMultiplexer redisConnectionMultiplexer = ConnectionMultiplexer.Connect(configurationOptions);
+            IServer redisServer = redisConnectionMultiplexer.GetServer(configurationOptions.EndPoints[0]);
+
+            IGrouping<string, System.Collections.Generic.KeyValuePair<string, string>>[] info = redisServer.Info();
             IGrouping<string, System.Collections.Generic.KeyValuePair<string, string>> serverInfo = info.SingleOrDefault(i => i.Key.Equals("Server", StringComparison.InvariantCultureIgnoreCase));
             IGrouping<string, System.Collections.Generic.KeyValuePair<string, string>> clientsInfo = info.SingleOrDefault(i => i.Key.Equals("Clients", StringComparison.InvariantCultureIgnoreCase));
             IGrouping<string, System.Collections.Generic.KeyValuePair<string, string>> memoryInfo = info.SingleOrDefault(i => i.Key.Equals("Memory", StringComparison.InvariantCultureIgnoreCase));
@@ -335,23 +344,6 @@ namespace PRTG_Redis_Sensor
             {
                 NullValueHandling = NullValueHandling.Ignore
             }));
-        }
-
-        /// <summary>
-        /// Gets the Redis login password if it is present in the 
-        /// second program argument.
-        /// </summary>
-        /// <param name="args">Array of program arguments</param>
-        /// <returns>The formatted password string</returns>
-        private static string GetPasswordFromArgs(string[] args)
-        {
-            if (args.Length > 1)
-            {
-                string redisPassword = args[1];
-                return $",Password={redisPassword}";
-            }
-
-            return string.Empty;
         }
 
         private static string SafeGetInt32(Func<string> func)
