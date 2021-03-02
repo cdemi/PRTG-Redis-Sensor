@@ -7,20 +7,20 @@ A Redis Sensor for PRTG. Read more at: https://blog.cdemi.io/monitoring-redis-in
 
 # Usage
 ## Download or Compile
-You can download the latest `PRTG-Redis-Sensor-Windows.zip` from [GitHub Releases](https://github.com/cdemi/PRTG-Redis-Sensor/releases/latest), or you can download the source-code and compile it yourself
+You can download the latest `PRTG.Redis.Sensor.exe` from [GitHub Releases](https://github.com/cdemi/PRTG-Redis-Sensor/releases/latest), or you can download the source-code and compile it yourself
 
 ## Run the executable
-`"PRTG Redis Sensor.exe" <ServerIPorHostname:Port> <Password?>`
+`"PRTG.Redis.Sensor.exe" <ServerIPorHostname:Port> <Password?>`
 
 ### Example
 
-- `"PRTG Redis Sensor.exe" myredis.domain.local:6379`
-- `"PRTG Redis Sensor.exe" myredis.domain.local:6379 somepassword`
+- `"PRTG.Redis.Sensor.exe" myredis.domain.local:6379`
+- `"PRTG.Redis.Sensor.exe" myredis.domain.local:6379 somepassword`
 
 ## Add the sensor on PRTG
-1. Copy the binary `PRTG Redis Sensor.exe` to the custom sensors folder of the probe `%programfiles(x86)%\PRTG Network Monitor\Custom Sensors\EXEXML\`
+1. Copy the binary `PRTG.Redis.Sensor.exe` to the custom sensors folder of the probe `%programfiles(x86)%\PRTG Network Monitor\Custom Sensors\EXEXML\`
 1. Add an `EXE/Script Advanced` sensor to a device
-2. Select `PRTG Redis Sensor.exe` from the EXE/Script list
+2. Select `PRTG.Redis.Sensor.exe` from the EXE/Script list
 3. Set the parameters to pass to the executable (see the samples)
 
 
