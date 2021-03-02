@@ -1,11 +1,7 @@
-[![Build Status](https://dev.azure.com/christopherdemicoli/PRTG-Redis-Sensor/_apis/build/status/cdemi.PRTG-Redis-Sensor?branchName=master)](https://dev.azure.com/christopherdemicoli/PRTG-Redis-Sensor/_build/latest?definitionId=4&branchName=master) [![Release Status](https://vsrm.dev.azure.com/christopherdemicoli/_apis/public/Release/badge/b37cea1a-e46d-4c31-9b53-b13c3df81028/1/1)](https://github.com/cdemi/PRTG-Redis-Sensor/releases/latest)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcdemi%2FPRTG-Redis-Sensor.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcdemi%2FPRTG-Redis-Sensor?ref=badge_shield)
-
 # PRTG-Redis-Sensor
 A Redis Sensor for PRTG. Read more at: https://blog.cdemi.io/monitoring-redis-in-prtg
 
 # Requirements
-* .NET Framework 4.5 or better
 * PRTG Version 16 (Does not work in PRTG Version 14)
 * Redis Server >= 3.2.11
 
@@ -28,5 +24,3 @@ You can download the latest `PRTG-Redis-Sensor-Windows.zip` from [GitHub Release
 3. Set the parameters to pass to the executable (see the samples)
 
 
-## License
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcdemi%2FPRTG-Redis-Sensor.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcdemi%2FPRTG-Redis-Sensor?ref=badge_large)
