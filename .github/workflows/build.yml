@@ -64,5 +64,5 @@ jobs:
         run: dotnet publish -c Release -r win-x64 -p:IncludeNativeLibrariesForSelfExtract=true -p:AssemblyVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} -p:FileVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} -p:InformationalVersion=${{ steps.gitversion.outputs.Sha }} -p:PublishSingleFile=true -p:PublishTrimmed=true --self-contained true
       - uses: actions/upload-artifact@v2
         with:
-          name: PRTG Redis Sensor
-          path: bin/Release/net5.0/win-x64/publish
+          name: PRTG.Redis.Sensor.exe
+          path: bin/Release/net5.0/win-x64/publish/PRTG Redis Sensor.exe
