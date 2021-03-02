@@ -61,7 +61,7 @@ jobs:
           echo "CommitDate: ${{ steps.gitversion.outputs.commitDate }}"
 
       - name: Publish for Windows Self-Contained
-        run: dotnet publish -c Release -r win-x64 -p:AssemblyVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} -p:FileVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} -p:InformationalVersion=${{ steps.gitversion.outputs.Sha }} -p:PublishSingleFile=true -p:PublishTrimmed=true --self-contained true
+        run: dotnet publish -c Release -r win-x64 -p:IncludeNativeLibrariesForSelfExtract=true -p:AssemblyVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} -p:FileVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} -p:InformationalVersion=${{ steps.gitversion.outputs.Sha }} -p:PublishSingleFile=true -p:PublishTrimmed=true --self-contained true
       - uses: actions/upload-artifact@v2
         with:
           name: PRTG Redis Sensor
