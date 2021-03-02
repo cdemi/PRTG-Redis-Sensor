@@ -1,4 +1,4 @@
-[![Build, Release and Publish](https://github.com/cdemi/PRTG-Redis-Sensor/actions/workflows/release-publish.yml/badge.svg)](https://github.com/cdemi/PRTG-Redis-Sensor/actions/workflows/release-publish.yml)
+[![Build, Release and Publish](https://github.com/cdemi/PRTG-Redis-Sensor/actions/workflows/release-publish.yml/badge.svg)](https://github.com/cdemi/PRTG-Redis-Sensor/actions/workflows/release-publish.yml) [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/cdemi/PRTG-Redis-Sensor?sort=semver)](https://github.com/cdemi/PRTG-Redis-Sensor/releases/latest)
 
 # PRTG-Redis-Sensor
 A Redis Sensor for PRTG. Read more at: https://blog.cdemi.io/monitoring-redis-in-prtg
