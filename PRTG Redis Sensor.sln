@@ -1,15 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30914.41
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRTG Redis Sensor", "PRTG Redis Sensor.csproj", "{DF6BF3BB-1835-4F6E-92C3-0B3926129F73}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7AF8C891-1563-4906-84A8-FBB1F8F2CE4C}"
-	ProjectSection(SolutionItems) = preProject
-		azure-pipelines.yml = azure-pipelines.yml
-		README.md = README.md
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRTG Redis Sensor", "PRTG Redis Sensor.csproj", "{25435E2B-700F-4E47-99CA-37522248E42B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DF6BF3BB-1835-4F6E-92C3-0B3926129F73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF6BF3BB-1835-4F6E-92C3-0B3926129F73}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DF6BF3BB-1835-4F6E-92C3-0B3926129F73}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF6BF3BB-1835-4F6E-92C3-0B3926129F73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25435E2B-700F-4E47-99CA-37522248E42B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25435E2B-700F-4E47-99CA-37522248E42B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25435E2B-700F-4E47-99CA-37522248E42B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25435E2B-700F-4E47-99CA-37522248E42B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {2BFC6F4A-2AFE-4A69-97C7-B1A2FC85BC79}
+		SolutionGuid = {BAD63CE6-FB27-4EFB-9F70-EE256C826400}
 	EndGlobalSection
 EndGlobal
