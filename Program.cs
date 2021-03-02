@@ -95,6 +95,22 @@ var response = new
                 }
             },
             {
+                new PRTGResult()
+                {
+                    channel = "RDB Changes Since Last Save",
+                    unit = PRTGUnit.Count,
+                    value = persistenceInfo.SingleOrDefault(i => i.Key.Equals("rdb_changes_since_last_save")).Value == "ok" ? "1" : "0"
+                }
+            },
+            {
+                new PRTGResult()
+                {
+                    channel = "RDB Last Save Time",
+                    unit = PRTGUnit.Custom,
+                    value = persistenceInfo.SingleOrDefault(i => i.Key.Equals("rdb_last_save_time")).Value == "ok" ? "1" : "0"
+                }
+            },
+            {
                 new PRTGResult
                 {
                     channel = "RDB Last Background Save Status",
@@ -159,6 +175,22 @@ var response = new
                     channel = "Instantaneous Operations per Second",
                     unit = PRTGUnit.Count,
                     value = statsInfo.SingleOrDefault(i => i.Key.Equals("instantaneous_ops_per_sec")).Value
+                }
+            },
+            {
+                new PRTGResult()
+                {
+                    channel = "Instantaneous Input kbps",
+                    unit = PRTGUnit.BytesBandwidth,
+                    value = statsInfo.SingleOrDefault(i => i.Key.Equals("instantaneous_input_kbps")).Value
+                }
+            },
+            {
+                new PRTGResult()
+                {
+                    channel = "Instantaneous Output kbps",
+                    unit = PRTGUnit.BytesBandwidth,
+                    value = statsInfo.SingleOrDefault(i => i.Key.Equals("instantaneous_output_kbps")).Value
                 }
             },
             {
@@ -271,7 +303,7 @@ var response = new
             {
                 new PRTGResult
                 {
-                    channel = "keyspace_hits",
+                    channel = "Keyspace Hits",
                     unit = PRTGUnit.Count,
                     value = statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_hits")).Value
                 }
@@ -279,9 +311,18 @@ var response = new
             {
                 new PRTGResult
                 {
-                    channel = "keyspace_misses",
+                    channel = "Keyspace Misses",
                     unit = PRTGUnit.Count,
                     value = statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_misses")).Value
+                }
+            },
+            {
+                new PRTGResult()
+                {
+                    channel = "Hit Rate",
+                    unit = PRTGUnit.Percent,
+                    Float=1,
+                    value = (Convert.ToDouble(statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_hits")).Value) / (Convert.ToDouble(statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_hits")).Value) + Convert.ToDouble(statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_misses")).Value))).ToString()
                 }
             },
             {
