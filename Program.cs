@@ -204,7 +204,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 new PRTGResult()
                                 {
-                                    channel = "Pubsib Patterns",
+                                    channel = "Pubsub Patterns",
                                     unit = PRTGUnit.Count,
                                     value = statsInfo.SingleOrDefault(i => i.Key.Equals("pubsub_patterns")).Value
                                 }
