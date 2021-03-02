@@ -10,7 +10,8 @@ namespace PRTG_Redis_Sensor
     {
         private static void Main(string[] args)
         {
-            ConfigurationOptions configurationOptions = new ConfigurationOptions() {
+            ConfigurationOptions configurationOptions = new ConfigurationOptions()
+            {
                 EndPoints =
                 {
                     { args[0] }
