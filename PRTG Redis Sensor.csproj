@@ -1,15 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>PRTG_Redis_Sensor</RootNamespace>
-    <DebugType>embedded</DebugType>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net5.0</TargetFramework>
+		<RootNamespace>PRTG_Redis_Sensor</RootNamespace>
+		<DebugType>embedded</DebugType>
+		<Description>A Redis Sensor for PRTG</Description>
+		<Copyright>MIT</Copyright>
+		<PackageProjectUrl>https://github.com/cdemi/PRTG-Redis-Sensor</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/cdemi/PRTG-Redis-Sensor</RepositoryUrl>
+		<PackageLicenseUrl>https://github.com/cdemi/PRTG-Redis-Sensor/blob/master/LICENSE</PackageLicenseUrl>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="StackExchange.Redis" Version="2.2.4" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="StackExchange.Redis" Version="2.2.4" />
+	</ItemGroup>
 
 </Project>
