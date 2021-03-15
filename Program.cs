@@ -186,6 +186,7 @@ namespace PRTG_Redis_Sensor
                             new PRTGResult()
                             {
                                 channel = "Instantaneous Input kbps",
+                                Float = 1,
                                 unit = PRTGUnit.BytesBandwidth,
                                 value = statsInfo.SingleOrDefault(i => i.Key.Equals("instantaneous_input_kbps")).Value
                             }
@@ -194,6 +195,7 @@ namespace PRTG_Redis_Sensor
                             new PRTGResult()
                             {
                                 channel = "Instantaneous Output kbps",
+                                Float = 1,
                                 unit = PRTGUnit.BytesBandwidth,
                                 value = statsInfo.SingleOrDefault(i => i.Key.Equals("instantaneous_output_kbps")).Value
                             }
@@ -202,7 +204,8 @@ namespace PRTG_Redis_Sensor
                             new PRTGResult
                             {
                                 channel = "Total Net Input Bytes",
-                                unit = PRTGUnit.BytesBandwidth,
+                                Float = 1,
+                                unit = PRTGUnit.BytesDisk,
                                 value = statsInfo.SingleOrDefault(i => i.Key.Equals("total_net_input_bytes")).Value
                             }
                         },
@@ -210,6 +213,7 @@ namespace PRTG_Redis_Sensor
                             new PRTGResult
                             {
                                 channel = "Total Net Output Bytes",
+                                Float = 1,
                                 unit = PRTGUnit.BytesBandwidth,
                                 value = statsInfo.SingleOrDefault(i => i.Key.Equals("total_net_output_bytes")).Value
                             }
