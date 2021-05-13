@@ -3,6 +3,7 @@ using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 
 namespace PRTG_Redis_Sensor
@@ -11,6 +12,9 @@ namespace PRTG_Redis_Sensor
     {
         private static void Main(string[] args)
         {
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
+
             ConfigurationOptions configurationOptions = new()
             {
                 EndPoints = { { args[0] } },
@@ -205,7 +209,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Total Net Input Bytes",
                                 Float = 1,
-                                unit = PRTGUnit.BytesDisk,
+                                unit = PRTGUnit.BytesBandwidth,
                                 value = statsInfo.SingleOrDefault(i => i.Key.Equals("total_net_input_bytes")).Value
                             }
                         },
