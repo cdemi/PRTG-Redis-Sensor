@@ -335,7 +335,7 @@ namespace PRTG_Redis_Sensor
                                 channel = "Hit Rate",
                                 unit = PRTGUnit.Percent,
                                 Float=1,
-                                value = (Convert.ToDouble(statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_hits")).Value) / (Convert.ToDouble(statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_hits")).Value) + Convert.ToDouble(statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_misses")).Value))).ToString()
+                                value = SafeGetFloat(() => (Convert.ToDouble(statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_hits")).Value) / (Convert.ToDouble(statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_hits")).Value) + Convert.ToDouble(statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_misses")).Value))).ToString())
                             }
                         },
                         {
@@ -398,6 +398,21 @@ namespace PRTG_Redis_Sensor
             try
             {
                 return func();
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.ToString());
+                return "0";
+            }
+        }
+        
+        private static string SafeGetFloat(Func<string> func)
+        {
+            try
+            {
+                var result = func();
+                return result.Equals("NaN", StringComparison.InvariantCultureIgnoreCase) ? "0" : result;
+
             }
             catch (Exception ex)
             {
