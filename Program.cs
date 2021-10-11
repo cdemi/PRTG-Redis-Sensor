@@ -335,7 +335,16 @@ namespace PRTG_Redis_Sensor
                                 channel = "Hit Rate",
                                 unit = PRTGUnit.Percent,
                                 Float=1,
-                                value = SafeGetFloat(() => (Convert.ToDouble(statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_hits")).Value) / (Convert.ToDouble(statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_hits")).Value) + Convert.ToDouble(statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_misses")).Value))).ToString())
+                                value = SafeGetFloat(() => 
+                                    (
+                                        100.0 * 
+                                        Convert.ToDouble(statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_hits")).Value) / 
+                                        (
+                                            Convert.ToDouble(statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_hits")).Value) +
+                                            Convert.ToDouble(statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_misses")).Value)
+                                        )
+                                    ).ToString()
+                                )
                             }
                         },
                         {
