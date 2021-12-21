@@ -11,11 +11,9 @@
 		<RepositoryUrl>https://github.com/cdemi/PRTG-Redis-Sensor</RepositoryUrl>
 		<PackageLicenseUrl>https://github.com/cdemi/PRTG-Redis-Sensor/blob/master/LICENSE</PackageLicenseUrl>
 		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
-		<UserSecretsId>696ca65a-c33f-4dd3-9e02-9a588d4f8041</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="StackExchange.Redis" Version="2.2.88" />
 	</ItemGroup>
