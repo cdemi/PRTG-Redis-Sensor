@@ -51,7 +51,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Uptime",
                                 unit = PRTGUnit.TimeSeconds,
-                                value = serverInfo?.SingleOrDefault(i => i.Key.Equals("uptime_in_seconds")).Value
+                                value = serverInfo != null ? (serverInfo?.SingleOrDefault(i => i.Key.Equals("uptime_in_seconds")).Value) : ""
                             }
                         },
                         {
@@ -59,7 +59,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Connected Clients",
                                 unit = PRTGUnit.Count,
-                                value = clientsInfo?.SingleOrDefault(i => i.Key.Equals("connected_clients")).Value
+                                value = clientsInfo != null ? (clientsInfo?.SingleOrDefault(i => i.Key.Equals("connected_clients")).Value) : ""
                             }
                         },
                         {
@@ -67,7 +67,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Blocked Clients",
                                 unit = PRTGUnit.Count,
-                                value = clientsInfo?.SingleOrDefault(i => i.Key.Equals("blocked_clients")).Value
+                                value = clientsInfo != null ? (clientsInfo?.SingleOrDefault(i => i.Key.Equals("blocked_clients")).Value) : ""
                             }
                         },
                         {
@@ -75,7 +75,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Used Memory",
                                 unit = PRTGUnit.BytesMemory,
-                                value = memoryInfo?.SingleOrDefault(i => i.Key.Equals("used_memory")).Value
+                                value = memoryInfo != null ? (memoryInfo?.SingleOrDefault(i => i.Key.Equals("used_memory")).Value) : ""
                             }
                         },
                         {
@@ -83,7 +83,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Used Memory RSS",
                                 unit = PRTGUnit.BytesMemory,
-                                value = memoryInfo?.SingleOrDefault(i => i.Key.Equals("used_memory_rss")).Value
+                                value = memoryInfo != null ? (memoryInfo?.SingleOrDefault(i => i.Key.Equals("used_memory_rss")).Value) : ""
                             }
                         },
                         {
@@ -91,7 +91,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Used Memory Peak",
                                 unit = PRTGUnit.BytesMemory,
-                                value = memoryInfo?.SingleOrDefault(i => i.Key.Equals("used_memory_peak")).Value
+                                value = memoryInfo != null ? (memoryInfo?.SingleOrDefault(i => i.Key.Equals("used_memory_peak")).Value) : ""
                             }
                         },
                         {
@@ -100,7 +100,7 @@ namespace PRTG_Redis_Sensor
                                 channel = "Memory Fragmentation Ratio",
                                 unit = PRTGUnit.Custom,
                                 Float = 1,
-                                value = memoryInfo?.SingleOrDefault(i => i.Key.Equals("mem_fragmentation_ratio")).Value
+                                value = memoryInfo != null ? (memoryInfo?.SingleOrDefault(i => i.Key.Equals("mem_fragmentation_ratio")).Value) : ""
                             }
                         },
                         {
@@ -108,7 +108,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "RDB Changes Since Last Save",
                                 unit = PRTGUnit.Count,
-                                value = persistenceInfo?.SingleOrDefault(i => i.Key.Equals("rdb_changes_since_last_save")).Value == "ok" ? "1" : "0"
+                                value = persistenceInfo != null ? (persistenceInfo?.SingleOrDefault(i => i.Key.Equals("rdb_changes_since_last_save")).Value == "ok" ? "1" : "0") : "0"
                             }
                         },
                         {
@@ -116,7 +116,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "RDB Last Save Time",
                                 unit = PRTGUnit.Custom,
-                                value = persistenceInfo?.SingleOrDefault(i => i.Key.Equals("rdb_last_save_time")).Value == "ok" ? "1" : "0"
+                                value = persistenceInfo != null ? (persistenceInfo?.SingleOrDefault(i => i.Key.Equals("rdb_last_save_time")).Value == "ok" ? "1" : "0") : "0"
                             }
                         },
                         {
@@ -125,7 +125,7 @@ namespace PRTG_Redis_Sensor
                                 channel = "RDB Last Background Save Status",
                                 unit = PRTGUnit.Count,
                                 ShowChart = 0,
-                                value = persistenceInfo?.SingleOrDefault(i => i.Key.Equals("rdb_last_bgsave_status")).Value == "ok" ? "1" : "0"
+                                value = persistenceInfo != null ? (persistenceInfo?.SingleOrDefault(i => i.Key.Equals("rdb_last_bgsave_status")).Value == "ok" ? "1" : "0") : "0"
                             }
                         },
                         {
@@ -133,7 +133,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "RDB Last Background Save Time in Seconds",
                                 unit = PRTGUnit.TimeSeconds,
-                                value = persistenceInfo?.SingleOrDefault(i => i.Key.Equals("rdb_last_bgsave_time_sec")).Value
+                                value = persistenceInfo != null ? (persistenceInfo?.SingleOrDefault(i => i.Key.Equals("rdb_last_bgsave_time_sec")).Value) : ""
                             }
                         },
                         {
@@ -141,7 +141,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "AOF Last Rewrite Time in Seconds",
                                 unit = PRTGUnit.TimeSeconds,
-                                value = persistenceInfo?.SingleOrDefault(i => i.Key.Equals("aof_last_rewrite_time_sec")).Value
+                                value = persistenceInfo != null ? (persistenceInfo?.SingleOrDefault(i => i.Key.Equals("aof_last_rewrite_time_sec")).Value) : ""
                             }
                         },
                         {
@@ -150,7 +150,7 @@ namespace PRTG_Redis_Sensor
                                 channel = "AOF Last Background Rewrite Status",
                                 unit = PRTGUnit.Count,
                                 ShowChart = 0,
-                                value = persistenceInfo?.SingleOrDefault(i => i.Key.Equals("aof_last_bgrewrite_status")).Value == "ok" ? "1" : "0"
+                                value = persistenceInfo != null ? (persistenceInfo?.SingleOrDefault(i => i.Key.Equals("aof_last_bgrewrite_status")).Value == "ok" ? "1" : "0") : "0"
                             }
                         },
                         {
@@ -159,7 +159,7 @@ namespace PRTG_Redis_Sensor
                                 channel = "AOF Last Write Status",
                                 unit = PRTGUnit.Count,
                                 ShowChart = 0,
-                                value = persistenceInfo?.SingleOrDefault(i => i.Key.Equals("aof_last_write_status")).Value == "ok" ? "1" : "0"
+                                value = persistenceInfo != null ? (persistenceInfo?.SingleOrDefault(i => i.Key.Equals("aof_last_write_status")).Value == "ok" ? "1" : "0") : "0"
                             }
                         },
                         {
@@ -167,7 +167,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Total Connections Received",
                                 unit = PRTGUnit.Count,
-                                value = statsInfo?.SingleOrDefault(i => i.Key.Equals("total_connections_received")).Value
+                                value = statsInfo != null ? (statsInfo?.SingleOrDefault(i => i.Key.Equals("total_connections_received")).Value) : ""
                             }
                         },
                         {
@@ -175,7 +175,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Total Commands Processed",
                                 unit = PRTGUnit.Count,
-                                value = statsInfo?.SingleOrDefault(i => i.Key.Equals("total_commands_processed")).Value
+                                value = statsInfo != null ? (statsInfo?.SingleOrDefault(i => i.Key.Equals("total_commands_processed")).Value) : ""
                             }
                         },
                         {
@@ -183,7 +183,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Instantaneous Operations per Second",
                                 unit = PRTGUnit.Count,
-                                value = statsInfo?.SingleOrDefault(i => i.Key.Equals("instantaneous_ops_per_sec")).Value
+                                value = statsInfo != null ? (statsInfo?.SingleOrDefault(i => i.Key.Equals("instantaneous_ops_per_sec")).Value) : ""
                             }
                         },
                         {
@@ -192,7 +192,7 @@ namespace PRTG_Redis_Sensor
                                 channel = "Instantaneous Input kbps",
                                 Float = 1,
                                 unit = PRTGUnit.BytesBandwidth,
-                                value = statsInfo?.SingleOrDefault(i => i.Key.Equals("instantaneous_input_kbps")).Value
+                                value = statsInfo != null ? (statsInfo?.SingleOrDefault(i => i.Key.Equals("instantaneous_input_kbps")).Value) : ""
                             }
                         },
                         {
@@ -201,7 +201,7 @@ namespace PRTG_Redis_Sensor
                                 channel = "Instantaneous Output kbps",
                                 Float = 1,
                                 unit = PRTGUnit.BytesBandwidth,
-                                value = statsInfo?.SingleOrDefault(i => i.Key.Equals("instantaneous_output_kbps")).Value
+                                value = statsInfo != null ? (statsInfo?.SingleOrDefault(i => i.Key.Equals("instantaneous_output_kbps")).Value) : ""
                             }
                         },
                         {
@@ -210,7 +210,7 @@ namespace PRTG_Redis_Sensor
                                 channel = "Total Net Input Bytes",
                                 Float = 1,
                                 unit = PRTGUnit.BytesBandwidth,
-                                value = statsInfo?.SingleOrDefault(i => i.Key.Equals("total_net_input_bytes")).Value
+                                value = statsInfo != null ? (statsInfo?.SingleOrDefault(i => i.Key.Equals("total_net_input_bytes")).Value) : ""
                             }
                         },
                         {
@@ -219,7 +219,7 @@ namespace PRTG_Redis_Sensor
                                 channel = "Total Net Output Bytes",
                                 Float = 1,
                                 unit = PRTGUnit.BytesBandwidth,
-                                value = statsInfo?.SingleOrDefault(i => i.Key.Equals("total_net_output_bytes")).Value
+                                value = statsInfo != null ? (statsInfo?.SingleOrDefault(i => i.Key.Equals("total_net_output_bytes")).Value) : ""
                             }
                         },
                         {
@@ -227,7 +227,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Rejected Connections",
                                 unit = PRTGUnit.Count,
-                                value = statsInfo?.SingleOrDefault(i => i.Key.Equals("rejected_connections")).Value
+                                value = statsInfo != null ? (statsInfo?.SingleOrDefault(i => i.Key.Equals("rejected_connections")).Value) : ""
                             }
                         },
                         {
@@ -235,7 +235,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Pubsub Channels",
                                 unit = PRTGUnit.Count,
-                                value = statsInfo?.SingleOrDefault(i => i.Key.Equals("pubsub_channels")).Value
+                                value = statsInfo != null ? (statsInfo?.SingleOrDefault(i => i.Key.Equals("pubsub_channels")).Value) : ""
                             }
                         },
                         {
@@ -243,7 +243,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Pubsub Patterns",
                                 unit = PRTGUnit.Count,
-                                value = statsInfo?.SingleOrDefault(i => i.Key.Equals("pubsub_patterns")).Value
+                                value = statsInfo != null ? (statsInfo?.SingleOrDefault(i => i.Key.Equals("pubsub_patterns")).Value) : ""
                             }
                         },
                         {
@@ -261,7 +261,7 @@ namespace PRTG_Redis_Sensor
                                 channel = "Is Replication Backlog Active",
                                 unit = PRTGUnit.Count,
                                 ShowChart = 0,
-                                value = replicationInfo?.SingleOrDefault(i => i.Key.Equals("repl_backlog_active")).Value
+                                value = replicationInfo != null ? (replicationInfo?.SingleOrDefault(i => i.Key.Equals("repl_backlog_active")).Value) : ""
                             }
                         },
                         {
@@ -269,7 +269,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Replication Backlog Size",
                                 unit = PRTGUnit.BytesMemory,
-                                value = replicationInfo?.SingleOrDefault(i => i.Key.Equals("repl_backlog_size")).Value
+                                value = replicationInfo != null ? (replicationInfo?.SingleOrDefault(i => i.Key.Equals("repl_backlog_size")).Value) : ""
                             }
                         }
                         ,
@@ -278,7 +278,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Replication Backlog First Size Byte Offset",
                                 unit = PRTGUnit.BytesMemory,
-                                value = replicationInfo?.SingleOrDefault(i => i.Key.Equals("repl_backlog_first_byte_offset")).Value
+                                value = replicationInfo != null ? (replicationInfo?.SingleOrDefault(i => i.Key.Equals("repl_backlog_first_byte_offset")).Value) : ""
                             }
                         },
                         {
@@ -286,7 +286,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Replication Backlog Histlen",
                                 unit = PRTGUnit.BytesMemory,
-                                value = replicationInfo?.SingleOrDefault(i => i.Key.Equals("repl_backlog_histlen")).Value
+                                value = replicationInfo != null ? (replicationInfo?.SingleOrDefault(i => i.Key.Equals("repl_backlog_histlen")).Value) : ""
                             }
                         },
                         {
@@ -294,7 +294,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Connected Slaves",
                                 unit = PRTGUnit.Count,
-                                value = replicationInfo?.SingleOrDefault(i => i.Key.Equals("connected_slaves")).Value
+                                value = replicationInfo != null ? (replicationInfo?.SingleOrDefault(i => i.Key.Equals("connected_slaves")).Value) : ""
                             }
                         },
                         {
@@ -302,7 +302,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Keys",
                                 unit = PRTGUnit.Count,
-                                value = SafeGetInt32(() => keyspaceInfo != null ? keyspaceInfo?.SingleOrDefault(i => i.Key.Equals("db0")).Value.Split(',').Select(x => x.Split('=')).ToDictionary(x => x[0], x => x[1])["keys"] : "0")
+                                value = SafeGetInt32(() => keyspaceInfo != null ? keyspaceInfo.SingleOrDefault(i => i.Key.Equals("db0")).Value.Split(',').Select(x => x.Split('=')).ToDictionary(x => x[0], x => x[1])["keys"] : "0")
                             }
                         },
                         {
@@ -310,7 +310,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Keys Expires",
                                 unit = PRTGUnit.Count,
-                                value = SafeGetInt32(() => keyspaceInfo != null ? keyspaceInfo?.SingleOrDefault(i => i.Key.Equals("db0")).Value.Split(',').Select(x => x.Split('=')).ToDictionary(x => x[0], x => x[1])["expires"] : "0")
+                                value = SafeGetInt32(() => keyspaceInfo != null ? keyspaceInfo.SingleOrDefault(i => i.Key.Equals("db0")).Value.Split(',').Select(x => x.Split('=')).ToDictionary(x => x[0], x => x[1])["expires"] : "0")
                             }
                         },
                         {
@@ -318,7 +318,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Keyspace Hits",
                                 unit = PRTGUnit.Count,
-                                value = statsInfo?.SingleOrDefault(i => i.Key.Equals("keyspace_hits")).Value
+                                value = statsInfo != null ? (statsInfo?.SingleOrDefault(i => i.Key.Equals("keyspace_hits")).Value) : ""
                             }
                         },
                         {
@@ -326,7 +326,7 @@ namespace PRTG_Redis_Sensor
                             {
                                 channel = "Keyspace Misses",
                                 unit = PRTGUnit.Count,
-                                value = statsInfo?.SingleOrDefault(i => i.Key.Equals("keyspace_misses")).Value
+                                value = statsInfo != null ? (statsInfo?.SingleOrDefault(i => i.Key.Equals("keyspace_misses")).Value) : ""
                             }
                         },
                         {
@@ -338,10 +338,10 @@ namespace PRTG_Redis_Sensor
                                 value = SafeGetFloat(() =>
                                     (
                                         100.0 *
-                                        Convert.ToDouble(statsInfo?.SingleOrDefault(i => i.Key.Equals("keyspace_hits")).Value) /
+                                        Convert.ToDouble(statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_hits")).Value) /
                                         (
-                                            Convert.ToDouble(statsInfo?.SingleOrDefault(i => i.Key.Equals("keyspace_hits")).Value) +
-                                            Convert.ToDouble(statsInfo?.SingleOrDefault(i => i.Key.Equals("keyspace_misses")).Value)
+                                            Convert.ToDouble(statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_hits")).Value) +
+                                            Convert.ToDouble(statsInfo.SingleOrDefault(i => i.Key.Equals("keyspace_misses")).Value)
                                         )
                                     ).ToString()
                                 )
@@ -353,7 +353,7 @@ namespace PRTG_Redis_Sensor
                                 channel = "Used CPU Sys",
                                 unit = PRTGUnit.Custom,
                                 Float=1,
-                                value = cpuInfo?.SingleOrDefault(i => i.Key.Equals("used_cpu_sys")).Value
+                                value = cpuInfo != null ? (cpuInfo?.SingleOrDefault(i => i.Key.Equals("used_cpu_sys")).Value) : ""
                             }
                         },
                         {
@@ -362,7 +362,7 @@ namespace PRTG_Redis_Sensor
                                 channel = "Used CPU User",
                                 unit = PRTGUnit.Custom,
                                 Float=1,
-                                value = cpuInfo?.SingleOrDefault(i => i.Key.Equals("used_cpu_user")).Value
+                                value = cpuInfo != null ? (cpuInfo?.SingleOrDefault(i => i.Key.Equals("used_cpu_user")).Value) : ""
                             }
                         },
                         {
@@ -371,7 +371,7 @@ namespace PRTG_Redis_Sensor
                                 channel = "Used CPU Sys Children",
                                 unit = PRTGUnit.Custom,
                                 Float=1,
-                                value = cpuInfo?.SingleOrDefault(i => i.Key.Equals("used_cpu_sys_children")).Value
+                                value = cpuInfo != null ? (cpuInfo?.SingleOrDefault(i => i.Key.Equals("used_cpu_sys_children")).Value) : ""
                             }
                         },
                         {
@@ -380,7 +380,7 @@ namespace PRTG_Redis_Sensor
                                 channel = "Used CPU User Children",
                                 unit = PRTGUnit.Custom,
                                 Float=1,
-                                value = cpuInfo?.SingleOrDefault(i => i.Key.Equals("used_cpu_user_children")).Value
+                                value = cpuInfo != null ? (cpuInfo?.SingleOrDefault(i => i.Key.Equals("used_cpu_user_children")).Value) : ""
                             }
                         },
                         {
@@ -389,7 +389,7 @@ namespace PRTG_Redis_Sensor
                                 channel = "Cluster Enabled",
                                 unit = PRTGUnit.Count,
                                 ShowChart = 0,
-                                value = clusterInfo?.SingleOrDefault(i => i.Key.Equals("cluster_enabled")).Value
+                                value = clusterInfo != null ? (clusterInfo?.SingleOrDefault(i => i.Key.Equals("cluster_enabled")).Value) : ""
                             }
                         }
                     }

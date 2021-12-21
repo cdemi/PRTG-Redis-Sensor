@@ -10,6 +10,7 @@
 		<PackageProjectUrl>https://github.com/cdemi/PRTG-Redis-Sensor</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/cdemi/PRTG-Redis-Sensor</RepositoryUrl>
 		<PackageLicenseUrl>https://github.com/cdemi/PRTG-Redis-Sensor/blob/master/LICENSE</PackageLicenseUrl>
+		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -2,7 +2,7 @@
   "profiles": {
     "PRTG Redis Sensor": {
       "commandName": "Project",
-      "commandLineArgs": "localhost:6379"
+      "commandLineArgs": "seafar-prod27-rc.redis.cache.windows.net:6379 yDkypI5Kmd3JWsgdGspTfvW8sPLnEPhYcYVWQJpN9vM="
     }
   }
 }
