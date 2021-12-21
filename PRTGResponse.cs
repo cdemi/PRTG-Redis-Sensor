@@ -58,10 +58,19 @@ namespace PRTG_Redis_Sensor
 
     public class PRTGResult
     {
-        public string channel { get; set; }
-        public string value { get; set; }
-        public PRTGUnit unit { get; set; }
-        public int? ShowChart { get; set; }
-        public int? Float { get; set; }
+        [JsonProperty(propertyName: "channel")]
+        public string Channel { get; set; }
+
+        [JsonProperty(propertyName: "value")]
+        public string Value { get; set; }
+
+        [JsonProperty(propertyName: "unit")]
+        public PRTGUnit Unit { get; set; }
+
+        [JsonProperty(propertyName: "showChart")]
+        public string ShowChart { get; set; }
+
+        [JsonProperty(propertyName:"float")]
+        public string Float { get; set; }
     }
 }
