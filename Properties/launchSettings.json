@@ -2,7 +2,7 @@
   "profiles": {
     "PRTG Redis Sensor": {
       "commandName": "Project",
-      "commandLineArgs": "localhost:6379"
+      "commandLineArgs": ""
     }
   }
 }
