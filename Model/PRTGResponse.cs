@@ -2,8 +2,9 @@
 using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 
-namespace PRTG_Redis_Sensor
+namespace PRTG_Redis_Sensor.Model
 {
+    //TODO: refactor, separate definitions on different files
     [JsonConverter(typeof(StringEnumConverter))]
     public enum PRTGUnit
     {
