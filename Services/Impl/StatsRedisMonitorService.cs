@@ -153,7 +153,15 @@ namespace PRTG_Redis_Sensor.Services.Impl
 								ShowChart = "0"
 							}
 						},
-						{
+                        {
+                            new PRTGResult
+                            {
+                                Channel = "Evicted Keys",
+                                Unit = PRTGUnit.Count,
+                                Value = clientsInfo?.SingleOrDefault(i => i.Key.Equals("evicted_keys")).Value ?? "0"
+                            }
+                        },
+                        {
 							new PRTGResult
 							{
 								Channel = "Total Connections Received",
