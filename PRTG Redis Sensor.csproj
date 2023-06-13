@@ -17,7 +17,7 @@
 		<PackageReference Include="CommandLineParser" Version="2.9.1" />
 		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="7.0.7" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="StackExchange.Redis" Version="2.6.111" />
+		<PackageReference Include="StackExchange.Redis" Version="2.6.116" />
 	</ItemGroup>
 
 </Project>
